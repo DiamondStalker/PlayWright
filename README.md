@@ -37,3 +37,7 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
+
+  <kbd style="background-color: blue; color: white; padding: 5px; border-radius: 5px;">
+  <b>Nota:</b> Esto puede ocurrir por bloqueos o tiempos de carga altos.
+</kbd>
