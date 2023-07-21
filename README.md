@@ -4,3 +4,7 @@
 ```bash
 git clone https://github.com/DiamondStalker/PlayWright
 ```
+
+## Carpetas
+
+### 1. PlayWrigth
