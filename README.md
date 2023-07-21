@@ -33,3 +33,7 @@ Funcionamiento :
 |------------------------------------------|
 | Todo el codigo se usa a modo de practica sin fines beneficos     |
 
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
