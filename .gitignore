@@ -1,8 +1,9 @@
 #Dependencias
-
 node_modules
 
 #Contenido Carpetas
-
 Read/
 Result/
+
+#Debu
+**/*.log
