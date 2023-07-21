@@ -7,7 +7,7 @@ git clone https://github.com/DiamondStalker/PlayWright
 
 ## Carpetas
 
-### 1. Indeed
+### 1.Indeed
 ```bash
     node index
 ```
