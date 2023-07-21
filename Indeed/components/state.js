@@ -1,7 +1,7 @@
 const { chromium } = require("playwright");
 const File = require("./file");
 const cliProgress = require("cli-progress");
-const {Routes} = require('../config.json');
+const { Routes } = require('../config.json');
 var console = require('./logger.js');
 
 
@@ -16,6 +16,12 @@ const State = {
 
         const context = await browser.newContext();
         const page = await context.newPage();
+
+        await page.addInitScript(() => {
+            Object.defineProperty(navigator, 'webdriver', {
+                get: () => false,
+            });
+        });
 
         await page.goto(`https://${Country}.indeed.com/browsejobs`);
         await page.waitForSelector(".state");
