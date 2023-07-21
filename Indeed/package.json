@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "cli-progress": "^3.12.0",
+    "inquirer": "8.0.0",
+    "install": "^0.13.0",
+    "node-notifier": "^10.0.1",
+    "npm": "^9.8.0",
+    "playwright": "1.31.2",
+    "puppeteer": "20.7.2",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  }
+}

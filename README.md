@@ -7,4 +7,4 @@ git clone https://github.com/DiamondStalker/PlayWright
 
 ## Carpetas
 
-### 1. PlayWrigth
+### 1. Indeed
