@@ -7,12 +7,14 @@ git clone https://github.com/DiamondStalker/PlayWright
 
 ## Carpetas
 
-### Indeed
+### 1.[Indeed](https://github.com/DiamondStalker/PlayWright/tree/main/Indeed)
+
+#### Ejecucion del codigo
 ```bash
     node index
 ```
     
-Funcionamiento :
+#### Funcionamiento :
 1. Se preguntara si se deseaa crear un archivo con la lista de links en caso de no tener, 
 
 
