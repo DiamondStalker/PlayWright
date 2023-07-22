@@ -1,0 +1,13 @@
+{
+    "chatGPT":{
+        "token" : "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"
+    },
+    "Routes":{
+        "Excel":"./Companies",
+        "Result":"./Result/CompanyResult.xlsx"
+    },
+    "user_data":{
+        "pas":"123",
+        "user":"Carlos"
+    }
+}
