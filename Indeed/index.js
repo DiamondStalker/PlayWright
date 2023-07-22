@@ -21,6 +21,7 @@ const { contry, Routes } = require('./config.json');
 
 (async () => {
 
+    
     try {
         await Questions.getStates() && await State.getStates(contry);
 
