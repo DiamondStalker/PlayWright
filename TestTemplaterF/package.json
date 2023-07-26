@@ -1,0 +1,18 @@
+{
+  "name": "testtemplaterf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "s": "npx playwright test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.36.2"
+  },
+  "dependencies": {
+    "cli-progress": "^3.12.0"
+  }
+}
