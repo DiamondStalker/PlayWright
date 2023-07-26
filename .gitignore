@@ -7,3 +7,12 @@ Result/
 
 #Debu
 **/*.log
+/test-results/
+/playwright-report/
+/playwright/.cache/
+
+#Testing
+node_modules/
+/test-results/
+/playwright-report/
+/playwright/.cache/
