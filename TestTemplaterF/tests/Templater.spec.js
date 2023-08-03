@@ -102,7 +102,7 @@
 const { test, expect } = require('@playwright/test');
 const File = require('../components/file');
 const links = require('../Read/links.json');
-const codes = require('../Read/config');
+//const codes = require('../Read/config');
 
 const miObjetoConFunciones = {
   extract: async function (page) { // Añadimos 'page' como parámetro
@@ -167,6 +167,7 @@ async function runTests() {
       try {
         await page.goto(link);
         let global = { pass_it: {} };
+        
         let data2 = await miObjetoConFunciones.extract(page); // Pasamos 'page' como parámetro
 
         let jobs = [{ title: "GHSOT" }];
@@ -175,15 +176,6 @@ async function runTests() {
         if (jobs.length > 0) {
           console.log("Jobs extraidos de forma correcta");
         }
-
-        // Ejecutar la función sumar del objeto miObjetoConFunciones
-        const suma = miObjetoConFunciones.sumar(2, 3);
-        console.log('Resultado de sumar:', suma);
-
-        // Ejecutar la función restar del objeto miObjetoConFunciones
-        const resta = await miObjetoConFunciones.restar(5, 2);
-        console.log('Resultado de restar:', resta);
-
         // Ejecutar la función extract del objeto miObjetoConFunciones
         const data = await miObjetoConFunciones.extract(page); // Pasamos 'page' como parámetro
         console.log('Resultado de extract:', data);
