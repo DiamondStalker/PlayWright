@@ -35,6 +35,14 @@ node index
 5. Cuando el proceso falla, se crea una notificación emergente en el computador advirtiendo que hubo un fallo en la corrida.
     > :warning: **Nota**: Esto puede ocurrir por bloqueos o tiempos de carga altos.
 
+### 2. [ValidarEdit](https://github.com/DiamondStalker/PlayWright/tree/main/ValidarEdit)
+
+Codigo que permite validar si dentro del cl el edit esta funcionando
+
+### 3. [TestTemplaterF](https://github.com/DiamondStalker/PlayWright/tree/main/TestTemplaterF)
+
+Validador de plantillas para `ATS` y otro tipo de informacion sobre codigos bases que se quieren probar antes de ser subidos a produccion.
+
 | ⚠️ Advertencia                               | 
 |:------------------------------------------:|
 | Todo el código se utiliza a modo de práctica sin fines benéficos. |
