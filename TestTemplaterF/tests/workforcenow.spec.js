@@ -10,90 +10,72 @@ const miObjetoConFunciones = {
 
     global = await page.evaluate(async (global) => {
 
-      let msg = console.log;
-
-      msg(global);
-
       let pass_it = { ...global.pass_it };
 
-      let out = {};
-
-      if (typeof pass_it == "undefined") pass_it = {};
-      if (!pass_it["page"]) {
-        out["pass_it"] = {
-          "page": 0,
-          "jobs": 0,
-          "totalJobs": 0
+      //[2023-08-08;TPL_workforcenow_V01] //Do not Delete
+      const out = {};
+      const jobs = [];
+      if (!pass_it.count) {
+        out.pass_it = {
+          count: 1,
+          limit: 0,
+          cid: '',
+          ccid: ''
         };
-      } else {
-        out["pass_it"] = pass_it;
+      } else out.pass_it = pass_it;
+
+      if (out.pass_it.count === 1) {
+        const urlObj = new URL(window.location.href).searchParams;
+        out.pass_it.cid = urlObj.get('cid');
+        out.pass_it.ccid = urlObj.get('ccId');
       }
-      let cid = window.location.href.split("cid=").pop().split("&").shift();
-      let ccId = window.location.href.split("ccId=").pop().split("&").shift();
-      let lang = window.location.href.split("lang=").pop().split("&").shift();
 
-
-      console.log(cid);
-      console.log(ccId);
-      console.log(lang);
-
-      let time = new Date();
-      time = Date.now();
+      const urlFeed = `https://workforcenow.adp.com/mascsr/default/careercenter/public/events/staffing/v1/job-requisitions?cid=${out.pass_it.cid}&ccId=${out.pass_it.ccid}&$skip=${out.pass_it.count}&$top=20`
       try {
-        let jobs = [];
-        const page = out.pass_it['page']
-        const resp = await fetch(`https://workforcenow.adp.com/mascsr/default/careercenter/public/events/staffing/v1/job-requisitions?cid=${cid}&timeStamp=${time}&lang=${lang}&iccFlag=yes&eccFlag=yes&ccId=${ccId}&locale=${lang}&$top=20&$skip=${page}`);
-        const data = await resp.json(); // The response.json() method parses the response as JSON and returns a promise. if request not return a JSON necessary change to 'resp.text()'
-        // msg(data);
-        // Job data
-        const json_jobs = data.jobRequisitions;
-        out["pass_it"]["jobs"] = data.meta.totalNumber; // stop condition
-        out["pass_it"]["totalJobs"] = out["pass_it"]["totalJobs"] + json_jobs.length; // all jobs
-        for (i in json_jobs) {
-          let job = {}; /*init*/
-          let elem = json_jobs[i];
+        const response = await fetch(urlFeed);
+        const data = await response.json();
+        const jsonJobs = data.jobRequisitions;
+        if (out.pass_it.limit === 0 && data.meta?.totalNumber) out.pass_it.limit = data.meta?.totalNumber;
+        for (const elem of jsonJobs) {
+          const job = {};
           job.title = elem.requisitionTitle;
-          job.url = `https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=${cid}&ccId=${ccId}&jobId=${elem.customFieldGroup.stringFields[0].stringValue}&lang=${lang}`
-          job.reqid = elem.clientRequisitionID;
-          //job.source_location = elem.positionOfsource_location;
-          //job.street_location = elem.positionOfstreet_location;
-          job.dateposted_raw = elem.postDate.split("T").shift();
-          job.dateposted_raw = `${job.dateposted_raw.split("-")[1]}/${job.dateposted_raw.split("-")[2]}/${job.dateposted_raw.split("-")[0]}`;
-          //job.dateclosed_raw = elem.positionOf.dateposted_raw;
-          //job.logo = elem.positionOflogo;
-          //job.source_apply_email = elem.positionOfemail;
-          //job.source_empname = elem.positionOfempname;
-          job.source_jobtype = elem.workLevelCode?.shortName
-          //job.source_salary = elem.positionOfsalary;
-          job.temp = "1";
-          elem.requisitionLocations.map(a => {
-            var jobw = { ...job };
-            jobw.source_location = a.nameCode.shortName;
-            let loc = [];
-            if (a.address.cityName) loc.push(a.address.cityName);
-            if (a.address.countrySubdivisionLevel1.codeValue) loc.push(a.address.countrySubdivisionLevel1.codeValue)
-            jobw.location = loc.join(", ");
-            jobs.push(jobw);
-          })
+          job.reqid = elem.customFieldGroup.stringFields[0].stringValue;
+          job.url = `https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=${out.pass_it.cid}&ccId=${out.pass_it.ccid}&jobId=${job.reqid}&source=TA`;
+          const [y, m, d] = elem.postDate.split('T')[0].split('-');
+          job.dateposted_raw = [m, d, y].join('/');
+          if (elem.workLevelCode) job.source_jobtype = elem.workLevelCode.shortName;
+          job.temp = '8aug23';
+          //job.street_location = elem.querySelector("").textContent.trim();
+          //job.dateclosed_raw = elem.querySelector("").textContent.trim();
+          //job.logo = elem.querySelector("").getAttribute("src").trim();
+          //job.source_apply_email = elem.querySelector("").textContent.trim();
+          //job.source_empname = elem.querySelector("").textContent.trim();
+          //job.source_salary = elem.querySelector("").textContent.trim();
+
+          if (elem.requisitionLocations?.length) {
+            const locations = elem.requisitionLocations.filter(loc => loc.nameCode?.shortName).map(loc => loc.nameCode.shortName.trim());
+            const source_location = locations.join('; ');
+            for (const location of locations) {
+              jobs.push({ ...job, location, source_location })
+            }
+          }
         }
-        out["jobs"] = jobs;
-        return out;
-      } catch (err) {
-        throw err;
-        // handle errors with fetch petion here
-        //console.log(err)
+      } catch (error) {
+        throw error;
       }
+      out.jobs = jobs;
+      return out;
     }, global)
 
     return global;
   },
   pagination: async function (page, global) {
     global = await page.evaluate(async (global) => {
-      var out = {};  
-    out["pass_it"] = global.pass_it;
-    out.pass_it.page+=20;
-    out["has_next_page"] = out.pass_it.totalJobs < out.pass_it.jobs ? true : false;  
-    return out;
+      const out = {};
+      out.pass_it = global.pass_it;
+      out.pass_it.count += 20;
+      out.has_next_page = (out.pass_it.count - 1) < out.pass_it.limit;
+      return out;
     }, global);
     return global;
   }
@@ -121,17 +103,18 @@ async function runTests() {
         let jobs = [];
 
         do {
+
           // Ejecutar la función extract del objeto miObjetoConFunciones
           global = await miObjetoConFunciones.extract(page, global); // Pasamos 'page' como parámetro
 
+          console.log(`Cantidad de jobs ==> ${global.jobs.length}`);
           jobs.push(global.jobs);
           jobs = jobs.flat();
 
           global = await miObjetoConFunciones.pagination(page, global);
-
-
         } while (global.has_next_page != false);
 
+        console.log(jobs)
         await expect(jobs.length).toBeGreaterThan(0);
 
         if (jobs.length > 0) {
@@ -142,7 +125,7 @@ async function runTests() {
 
 
       } catch (error) {
-        throw new Error(`Se esperaba información en el link ${link}, pero se obtuvo un valor igual a 0`);
+        throw (`Se esperaba información en el link ${link}, pero se obtuvo un valor igual a 0`);
       }
     });
   }
