@@ -36,12 +36,12 @@ module.exports = defineConfig({
   /* Configure projects for major browsers */
 
   use: {
-    trace: 'on',
-    video: 'on',
+    trace: 'only-on-failure',
+    video: 'only-on-failure',
     launchOptions: {
       slowMo: 500
     },
-    screenshot: 'on'
+    screenshot: 'only-on-failure'
   },
 
   projects: [
