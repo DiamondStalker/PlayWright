@@ -20,6 +20,7 @@ test.use({
 });
 
 /*
+
 test.describe('Pruebas en Chrome con perfil específico', () => {
     let results = [];
 
@@ -102,8 +103,8 @@ test.describe('Pruebas en Chrome con perfil específico', () => {
                 const alert = await exists?.textContent();
 
                 await page.waitForTimeout(500).then(() => { console.log("Validacion guardar ---> Medio Seg") })
-
-                if (exists &&  !/Spider updated/gmi.test(alert)) {
+                // @ts-ignore
+                if (exists && !/Spider updated/gmi.test(alert)) {
                     // Selecciona el elemento 'select' por su nombre y establece el valor en 'carlos.moreno'
                     await page.selectOption('select[name="owner"]', 'carlos.moreno');
 
