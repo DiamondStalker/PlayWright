@@ -1,4 +1,3 @@
-
 //@ts-check
 const fs = require("node:fs/promises");
 const { test, expect, chromium } = require('@playwright/test');
@@ -9,9 +8,10 @@ const chromeProfilePath = "C:/Users/mate9/AppData/Local/Google/Chrome/User" || "
 //const chromeExecutablePath = "C://Program Files//Google//Chrome//Application//chrome.exe";
 const chromeExecutablePath = "C://Users//mate9//AppData//Local//Google//Chrome//Application//chrome.exe";
 
-const idS = require("../src/casesMigrated.json");
+const idS = require("../src/CaseMigrated.json");
+//const idS = require("../src/test.json");
 
-const migrated = require("../src/prueba.json");
+//const migrated = require("../src/prueba.json");
 
 
 test.use({
@@ -70,9 +70,8 @@ test.describe('Pruebas en Chrome con perfil específico', () => {
 */
 
 test.describe('Pruebas en Chrome con perfil específico', () => {
-    let results = [];
 
-    for (let id of migrated) {
+    for (let id of idS) {
 
         if (typeof id.url == "string" && id.url != "Not_Applicable") {
             test(`Test for ${id.scanid}`, async () => {
