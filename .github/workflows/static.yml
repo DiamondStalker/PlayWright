@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: 14
 
+      - name: Set Git Remote URL
+        run: git remote set-url origin https://${{ secrets.Token_Page }}@github.com/DiamondStalker/PlayWright.git
+
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
@@ -25,8 +28,6 @@ jobs:
           path: docs/.vitepress/dist
 
       - name: Deploy with gh-pages
-        run: |
-          git remote set-url origin https://github.com/DiamondStalker/PlayWright.git
-          npx gh-pages -d docs/.vitepress/dist -u "github-actions-bot <support+actions@github.com>"
+        run: npx gh-pages -d docs/.vitepress/dist -u "github-actions-bot <support+actions@github.com>"
         env:
           GITHUB_TOKEN: ${{ secrets.Token_Page }}
