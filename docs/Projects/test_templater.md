@@ -7,3 +7,4 @@ Validador de plantillas para `ATS` y otro tipo de informacion sobre codigos base
 |⚠️ Advertencia|
 |--|
 |Todo el código se utiliza a modo de práctica sin fines benéficos.|
+
