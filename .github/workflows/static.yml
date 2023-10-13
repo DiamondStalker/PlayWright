@@ -37,8 +37,5 @@ jobs:
 
       - name: Verify deployment result
         run: |
-          # Verifica la salida de la implementación
           cat deployment_files.txt
-        # Redirige la salida al archivo de registro
-        > deployment_result.txt
-
+          > deployment_result.txt
