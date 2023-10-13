@@ -18,6 +18,12 @@ jobs:
         with:
           node-version: 14
 
+      - name: List files in deployment path
+        run: |
+          ls -l docs/.vitepress/dist
+        # Redirige la salida al archivo de registro
+        > deployment_files.txt
+
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
@@ -29,3 +35,10 @@ jobs:
         with:
           github_token: ${{ secrets.Token_Page }}
           publish_dir: docs/.vitepress/dist
+
+      - name: Verify deployment result
+        run: |
+          # Verifica la salida de la implementación
+          cat deployment_files.txt
+        # Redirige la salida al archivo de registro
+        > deployment_result.txt
