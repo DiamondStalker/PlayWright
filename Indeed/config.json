@@ -1,7 +1,0 @@
-{
-    "contry": "ch",
-    "Routes":{
-        "ReadData" : "./Read",
-        "ResultData" : "./Result/Result_Indeed.csv"
-    }
-}
