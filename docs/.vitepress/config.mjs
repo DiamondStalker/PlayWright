@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base:/PlayWright/,
   title: "Projects",
   description: "Documentation of all the different projects with their fixes",
   themeConfig: {
