@@ -23,9 +23,10 @@ jobs:
         with:
           name: docs-artifact
           path: docs/.vitepress/dist
+
       - name: Deploy with gh-pages
         run: |
-            git remote set-url origin https://git:${Token_Page}@github.com/${PlayWright}.git
-            npx gh-pages -d build -u "github-actions-bot <support+actions@github.com>"
+          git remote set-url origin https://github.com/${{ github.repository }}.git
+          npx gh-pages -d docs/.vitepress/dist -u "github-actions-bot <support+actions@github.com>"
         env:
-            GITHUB_TOKEN: ${{ secrets.Token_Page }}
+          GITHUB_TOKEN: ${{ secrets.Token_Page }}
