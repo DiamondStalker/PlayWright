@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '/nombre-de-ruta/',
   title: "Projects",
   description: "Documentation of all the different projects with their fixes",
   themeConfig: {
@@ -27,10 +28,6 @@ export default defineConfig({
     footer: {
       message: 'Released under the MIT License.',
       copyright: 'Copyright © 2019-present Evan You'
-    },
-    lastUpdated: true,
-    srcDir: './src',
-    srcExclude: ['**/README.md', '**/TODO.md'],
-    outDir: '../public'
+    }
   }
 })
