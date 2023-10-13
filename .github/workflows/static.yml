@@ -21,8 +21,7 @@ jobs:
       - name: List files in deployment path
         run: |
           ls -l docs/.vitepress/dist
-        # Redirige la salida al archivo de registro
-        > deployment_files.txt
+          > deployment_files.txt
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
