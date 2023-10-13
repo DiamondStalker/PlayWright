@@ -42,3 +42,4 @@ jobs:
           cat deployment_files.txt
         # Redirige la salida al archivo de registro
         > deployment_result.txt
+
