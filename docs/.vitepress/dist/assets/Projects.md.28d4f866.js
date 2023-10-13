@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as a}from"./chunks/framework.df4a10e8.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"Projects.md","filePath":"Projects.md","lastUpdated":1697162971000}'),r={name:"Projects.md"};function o(s,c,n,d,p,_){return t(),a("div")}const f=e(r,[["render",o]]);export{m as __pageData,f as default};
