@@ -1,5 +1,3 @@
-// @ts-check
-
 const { test, expect } = require('@playwright/test');
 const File = require('../components/file');
 const links = require('../Read/links.json');

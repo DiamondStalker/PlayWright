@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "s": "npx playwright test"
+    "s": "npx playwright test",
+    "icims": "npx playwright test icims.spec.js"
   },
   "keywords": [],
   "author": "",
