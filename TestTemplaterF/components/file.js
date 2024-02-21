@@ -17,7 +17,7 @@ const File = {
         for (const k of html_jobs) {
             const values = Object.values(k);
             const csvData = values.join(";");
-            fs2.appendFile("./Resultados/icims.csv", csvData.replace(/,/gmi,'>') + "\r", err => {
+            fs2.appendFile("./Resultados/BrassRing.csv", csvData.replace(/,/gmi,'>') + "\r", err => {
                 if (err) {
                     console.error(err);
                 }

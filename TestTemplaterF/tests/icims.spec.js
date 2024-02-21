@@ -3,7 +3,7 @@ const fs = require('fs');
 const File = require('../components/file');
 //const links = require('../Read/links.json');
 
-const links = require('../Read/linkss.json');
+const links = require('../Read/icimsValidate.json');
 //const links = require('../Read/test.json');
 
 
@@ -141,7 +141,7 @@ const miObjetoConFunciones = {
 
           for (const elem of htmlJobs) {
             const job = {};
-            job.title = elem.querySelector("h2").textContent.trim();
+            job.title = elem.querySelector("h3").textContent.trim();
             job.url = `${elem.querySelector("a").href.split("?").shift().trim()}?mode=job&iis=Job+Board&iisn=Talent.com`;
 
             const top_label_selector = 'span[class="sr-only field-label"]';
@@ -240,13 +240,15 @@ async function runTests() {
 
 
   for (const elem of links) {
-    elem.isValid=false;
+    elem.isValid = false;
 
     test(`Test for ${elem.id} Enlace  \n ${elem.url}`, async ({ page }) => {
-      
+
       try {
         await page.goto(elem.url);
 
+        // Esperar a que la página esté completamente cargada
+       // await page.waitForLoadState('networkidle');
 
         let global = { pass_it: {}, has_next_page: false, link: elem.url };
 

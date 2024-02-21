@@ -6,7 +6,7 @@ const Scanid = require('../UpdateIcims/Read/Scanid.json');
     // Inicia un navegador Puppeteer
     const browser = await puppeteer.launch({
         headless: false,
-        userDataDir: "DiamondStalker",
+        userDataDir: "Cache/DiamondStalker",
         ignoreHTTPSErrors: true,
         timeout: 120000
     });
@@ -21,6 +21,7 @@ const Scanid = require('../UpdateIcims/Read/Scanid.json');
 
         await page.goto(`https://www.talent.com/private/tools/content/scraper/spiderCodeTool.php?scanid=${id}`);
 
+        //Entramos a la peticion en formato web
         await page.goto(`https://www.talent.com/private/tools/content/scraper/services/loadSpiderCode.php?scanid=${id}&step=dynamic-extract`,
             { waitUntil: 'networkidle0' });
 
@@ -28,10 +29,13 @@ const Scanid = require('../UpdateIcims/Read/Scanid.json');
             return JSON.parse(document.querySelector('body').textContent)
         })
 
+        //Regresamos a spider Tools para poder interactuar con la paginade forma correcta
         await page.goto(`https://www.talent.com/private/tools/content/scraper/spiderCodeTool.php?scanid=${id}`);
 
-        let change = data.code.replace(" job.title = elem.querySelector('h2').textContent.trim();", " job.title = elem.querySelector('h3').textContent.trim();")
+        //Cambiamos la linea que necesitamos para el caso en espesifico se pueden modificar
+        let change = data.code.replace(" job.title = elem.querySelector('h2').textContent.trim();", "job.title = elem.querySelector('h3').textContent.trim();")
 
+        // Cambiamos el codigo por el nuevo forzandolo desde la peticion que guarda el codigo
         let resp = await page.evaluate(async (id, change) => {
             let send = await fetch("https://www.talent.com/private/tools/content/scraper/services/saveSpiderCode.php", {
                 "headers": {
